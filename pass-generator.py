@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QFormLayout, QLineEdit, QLabel, QPushButton
+from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 import random
 
@@ -28,6 +29,7 @@ class Ui(QWidget):
         self.f1.addRow(self.programmer)
 
         self.setLayout(self.f1)
+        self.setWindowIcon(QIcon('img/logo.png'))
         self.resize(500, 180)
 
     def generate(self):
