@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QFormLayout, QLineEdit, QLabel, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QFormLayout, QLineEdit, QLabel, QPushButton, QCheckBox
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 import random
@@ -12,6 +12,7 @@ class Ui(QWidget):
 
     def GUI(self):
         self.length_edit = QLineEdit(self)
+        self.number_incluce_checkbox = QCheckBox(self)
         self.submit_btn = QPushButton('Generate', self)
         self.password = QLineEdit(self)
         self.programmer = QLabel('Made by Shayan Kermani', self)
@@ -24,6 +25,7 @@ class Ui(QWidget):
         self.programmer.setAlignment(Qt.AlignCenter)
 
         self.f1.addRow('Lenght:', self.length_edit)
+        self.f1.addRow('Include numbers:', self.number_incluce_checkbox)
         self.f1.addRow(self.submit_btn)
         self.f1.addRow('Yout generated password:', self.password)
         self.f1.addRow(self.programmer)
@@ -37,17 +39,25 @@ class Ui(QWidget):
         password = ""
 
         for i in range(length):
-            rln = random.randint(0, 1) # 0: letter, 1: number
-            if rln == 0:
+            if self.number_incluce_checkbox.isChecked():
+                rln = random.randint(0, 1) # 0: letter, 1: number
+                if rln == 0:
+                    rc = random.randint(0, 1) # 0: lowercase, 1: uppercase
+                    rt = random.randint(1, 25) # letters
+                    if rc == 0:
+                        password += letters[rt]
+                    elif rc == 1:
+                        password += letters[rt].upper()
+                elif rln == 1:
+                    rt = random.randint(0, 9) # numbers
+                    password += str(rt)
+            elif not(self.number_incluce_checkbox.isChecked()):
                 rc = random.randint(0, 1) # 0: lowercase, 1: uppercase
                 rt = random.randint(1, 25) # letters
                 if rc == 0:
                     password += letters[rt]
                 elif rc == 1:
                     password += letters[rt].upper()
-            elif rln == 1:
-                rt = random.randint(0, 9) # numbers
-                password += str(rt)
 
         self.password.setText(password)
 
