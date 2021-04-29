@@ -4,6 +4,7 @@ from PyQt5.QtCore import Qt
 import random
 
 letters = {1:"a", 2:"b", 3:"c", 4:"d", 5:"e", 6:"f", 7:"g", 8:"h", 9:"i", 10:"j", 11:"k", 12:"l", 13:"m", 14:"n", 15:"o", 16:"p", 17:"q", 18:"r", 19:"s", 20:"t", 21:"u", 22:"v", 23:"w", 24:"y", 25:"z"}
+symbols = {1:"!", 2:"@", 3:"#", 4:"$", 5:"%", 6:"^", 7:"&", 8:"*", 9:"`", 10:"~"}
 
 class Ui(QWidget):
     def __init__(self):
@@ -40,7 +41,7 @@ class Ui(QWidget):
 
         for i in range(length):
             if self.number_incluce_checkbox.isChecked():
-                rln = random.randint(0, 1) # 0: letter, 1: number
+                rln = random.randint(0, 2) # 0: letter, 1: number, 2: symbols
                 if rln == 0:
                     rc = random.randint(0, 1) # 0: lowercase, 1: uppercase
                     rt = random.randint(1, 25) # letters
@@ -51,13 +52,21 @@ class Ui(QWidget):
                 elif rln == 1:
                     rt = random.randint(0, 9) # numbers
                     password += str(rt)
+                elif rln == 2:
+                    rs = random.randint(1, 10)
+                    password += symbols[rs]
             elif not(self.number_incluce_checkbox.isChecked()):
-                rc = random.randint(0, 1) # 0: lowercase, 1: uppercase
-                rt = random.randint(1, 25) # letters
-                if rc == 0:
-                    password += letters[rt]
-                elif rc == 1:
-                    password += letters[rt].upper()
+                rln = random.randint(0, 1) # 0: letter, 1: symbols
+                if rln == 0:
+                    rc = random.randint(0, 1) # 0: lowercase, 1: uppercase
+                    rt = random.randint(1, 25) # letters
+                    if rc == 0:
+                        password += letters[rt]
+                    elif rc == 1:
+                        password += letters[rt].upper()
+                elif rln == 1:
+                    rs = random.randint(1, 10)
+                    password += symbols[rs]
 
         self.password.setText(password)
 
