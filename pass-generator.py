@@ -14,6 +14,7 @@ class Ui(QWidget):
     def GUI(self):
         self.length_edit = QLineEdit(self)
         self.number_incluce_checkbox = QCheckBox(self)
+        self.symbols_include_checkbox = QCheckBox(self)
         self.submit_btn = QPushButton('Generate', self)
         self.password = QLineEdit(self)
         self.programmer = QLabel('Made by Shayan Kermani', self)
@@ -26,6 +27,7 @@ class Ui(QWidget):
         self.programmer.setAlignment(Qt.AlignCenter)
 
         self.f1.addRow('Lenght:', self.length_edit)
+        self.f1.addRow('Include symbols:', self.symbols_include_checkbox)
         self.f1.addRow('Include numbers:', self.number_incluce_checkbox)
         self.f1.addRow(self.submit_btn)
         self.f1.addRow('Yout generated password:', self.password)
@@ -40,7 +42,7 @@ class Ui(QWidget):
         password = ""
 
         for i in range(length):
-            if self.number_incluce_checkbox.isChecked():
+            if (self.number_incluce_checkbox.isChecked()) and (self.symbols_include_checkbox.isChecked()):
                 rln = random.randint(0, 2) # 0: letter, 1: number, 2: symbols
                 if rln == 0:
                     rc = random.randint(0, 1) # 0: lowercase, 1: uppercase
@@ -55,7 +57,7 @@ class Ui(QWidget):
                 elif rln == 2:
                     rs = random.randint(1, 8)
                     password += symbols[rs]
-            elif not(self.number_incluce_checkbox.isChecked()):
+            elif not(self.number_incluce_checkbox.isChecked()) and self.symbols_include_checkbox.isChecked():
                 rln = random.randint(0, 1) # 0: letter, 1: symbols
                 if rln == 0:
                     rc = random.randint(0, 1) # 0: lowercase, 1: uppercase
@@ -67,6 +69,25 @@ class Ui(QWidget):
                 elif rln == 1:
                     rs = random.randint(1, 8)
                     password += symbols[rs]
+            elif self.number_incluce_checkbox.isChecked() and not(self.symbols_include_checkbox.isChecked()):
+                rln = random.randint(0, 1) # 0: letter, 1: numbers
+                if rln == 0:
+                    rc = random.randint(0, 1) # 0: lowercase, 1: uppercase
+                    rt = random.randint(1, 25) # letters
+                    if rc == 0:
+                        password += letters[rt]
+                    elif rc == 1:
+                        password += letters[rt].upper()
+                elif rln == 1:
+                    rt = random.randint(0, 9) # numbers
+                    password += str(rt)
+            elif not(self.number_incluce_checkbox.isChecked()) and not(self.symbols_include_checkbox.isChecked()):
+                rc = random.randint(0, 1) # 0: lowercase, 1: uppercase
+                rt = random.randint(1, 25) # letters
+                if rc == 0:
+                    password += letters[rt]
+                elif rc == 1:
+                    password += letters[rt].upper()
 
         self.password.setText(password)
 
