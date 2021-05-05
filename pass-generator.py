@@ -13,10 +13,10 @@ class Ui(QWidget):
 
     def GUI(self):
         self.length_edit = QLineEdit(self)
-        self.number_incluce_checkbox = QCheckBox(self)
-        self.symbols_include_checkbox = QCheckBox(self)
-        self.lower_characters_include_checkbox = QCheckBox(self)
-        self.upper_characters_include_checkbox = QCheckBox(self)
+        self.number_incluce_checkbox = QCheckBox('( e.g. 123456 )', self)
+        self.symbols_include_checkbox = QCheckBox('( e.g. @#$% )', self)
+        self.lower_characters_include_checkbox = QCheckBox('( e.g. abcdefgh )', self)
+        self.upper_characters_include_checkbox = QCheckBox('( e.g. ABCDEFGH )', self)
         self.submit_btn = QPushButton('Generate', self)
         self.password = QLineEdit(self)
         self.programmer = QLabel('Made by Shayan Kermani', self)
