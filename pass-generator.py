@@ -22,8 +22,6 @@ class Ui(QWidget):
         self.programmer = QLabel('Made by Shayan Kermani', self)
         self.f1 = QFormLayout(self)
 
-        self.password.setReadOnly(True)
-
         self.submit_btn.clicked.connect(self.generate)
 
         self.programmer.setAlignment(Qt.AlignCenter)
@@ -121,6 +119,7 @@ class Ui(QWidget):
                     rt = random.randint(1, 25) # letters
                     password += letters[rt].upper()
 
+        self.password.setText('')
         self.password.setText(password)
 
 if __name__ == "__main__":
