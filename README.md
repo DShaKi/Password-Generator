@@ -6,4 +6,4 @@ Totaly written by python :heart:
 
 Ui written by PyQt5 :snake:
 
-Copyright &copy; by shaki8591 (Shayan Kermani)
+Copyright &copy; by GShaKi
